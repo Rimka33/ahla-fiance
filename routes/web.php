@@ -80,7 +80,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // FAQ
         Route::post('faq/{faq}', [FaqController::class, 'update'])->name('faq.update');
-        Route::resource('faq', FaqController::class)->except(['update']);
+        Route::resource('faq', FaqController::class)->except(['update', 'show']);
 
         // Inbox (Questions des clients)
         Route::prefix('inbox')->name('inbox.')->group(function () {

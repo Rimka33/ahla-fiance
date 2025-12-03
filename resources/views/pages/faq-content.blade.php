@@ -165,35 +165,49 @@
 
 <script>
     // Gestion de l'affichage des icônes +/- dans l'accordion
+    // Compatible avec Bootstrap 5 et Bootstrap 4
     document.addEventListener('DOMContentLoaded', function() {
-        const accordionButtons = document.querySelectorAll('[data-bs-toggle="collapse"]');
+        // Essayer Bootstrap 5 d'abord
+        const accordionButtons = document.querySelectorAll('[data-bs-toggle="collapse"], [data-toggle="collapse"]');
 
         accordionButtons.forEach(button => {
-            // Écouter les événements de Bootstrap
-            const targetId = button.getAttribute('data-bs-target');
+            const targetId = button.getAttribute('data-bs-target') || button.getAttribute('data-target');
             const collapse = document.querySelector(targetId);
 
             if (collapse) {
+                // Bootstrap 5 events
                 collapse.addEventListener('shown.bs.collapse', function() {
-                    const icons = button.querySelector('.icons');
-                    if (icons) {
-                        const plusIcon = icons.querySelector('.icofont-plus');
-                        const minusIcon = icons.querySelector('.icofont-minus');
-                        if (plusIcon) plusIcon.style.display = 'none';
-                        if (minusIcon) minusIcon.style.display = 'block';
-                    }
+                    updateIcons(button, true);
                 });
 
                 collapse.addEventListener('hidden.bs.collapse', function() {
-                    const icons = button.querySelector('.icons');
-                    if (icons) {
-                        const plusIcon = icons.querySelector('.icofont-plus');
-                        const minusIcon = icons.querySelector('.icofont-minus');
-                        if (plusIcon) plusIcon.style.display = 'block';
-                        if (minusIcon) minusIcon.style.display = 'none';
-                    }
+                    updateIcons(button, false);
+                });
+
+                // Bootstrap 4 events (fallback)
+                $(collapse).on('shown.bs.collapse', function() {
+                    updateIcons(button, true);
+                });
+
+                $(collapse).on('hidden.bs.collapse', function() {
+                    updateIcons(button, false);
                 });
             }
         });
+
+        function updateIcons(button, isOpen) {
+            const icons = button.querySelector('.icons');
+            if (icons) {
+                const plusIcon = icons.querySelector('.icofont-plus');
+                const minusIcon = icons.querySelector('.icofont-minus');
+                if (isOpen) {
+                    if (plusIcon) plusIcon.style.display = 'none';
+                    if (minusIcon) minusIcon.style.display = 'block';
+                } else {
+                    if (plusIcon) plusIcon.style.display = 'block';
+                    if (minusIcon) minusIcon.style.display = 'none';
+                }
+            }
+        }
     });
 </script>

@@ -83,10 +83,10 @@
     <script src="{{ asset('js/jquery.js') }}"></script>
     <!-- owl-js-Link -->
     <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
-    <!-- bootstrap-js-Link -->
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <!-- Bootstrap 5 for FAQ accordion -->
+    <!-- Bootstrap 5 for FAQ accordion and other components -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- bootstrap-js-Link (Bootstrap 4 - keep for compatibility with existing components) -->
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <!-- aos-js-Link -->
     <script src="{{ asset('js/aos.js') }}"></script>
     <!-- Typed Js -->
