@@ -38,6 +38,11 @@ Route::get('/{page:slug}', [SiteController::class, 'page'])->name('page');
 
 // Routes admin (authentification)
 Route::prefix('admin')->name('admin.')->group(function () {
+    // Redirection /admin vers /admin/login
+    Route::get('/', function () {
+        return redirect()->route('admin.login');
+    });
+    
     // Routes publiques admin (login)
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
