@@ -73,6 +73,15 @@ class StaticImageController extends Controller
 
             // Vider le cache Laravel
             Cache::flush();
+            
+            // Si c'est l'image principale de la section "À propos", vider aussi le cache spécifique
+            if ($validated['file_path'] === 'images/appscreen.png') {
+                Cache::forget('home_about_section');
+                // Mettre à jour le timestamp de la section "À propos" pour forcer le rechargement
+                \App\Models\HomePageSection::where('section_key', 'about')
+                    ->where('image', 'images/appscreen.png')
+                    ->update(['updated_at' => now()]);
+            }
 
             // Si c'est une requête AJAX, retourner JSON
             if ($request->ajax() || $request->wantsJson()) {
@@ -194,6 +203,15 @@ class StaticImageController extends Controller
         
         // Vider TOUS les caches Laravel (y compris les caches de requêtes)
         Cache::flush();
+        
+        // Si c'est l'image principale de la section "À propos", vider aussi le cache spécifique
+        if ($staticImage->file_path === 'images/appscreen.png') {
+            Cache::forget('home_about_section');
+            // Mettre à jour le timestamp de la section "À propos" pour forcer le rechargement
+            \App\Models\HomePageSection::where('section_key', 'about')
+                ->where('image', 'images/appscreen.png')
+                ->update(['updated_at' => now()]);
+        }
         
         // Vider aussi le cache de requêtes Eloquent si disponible
         if (method_exists(\Illuminate\Database\Eloquent\Model::class, 'clearBootedModels')) {
