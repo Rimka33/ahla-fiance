@@ -11,7 +11,6 @@
     <div class="card-body">
         <form method="POST" action="{{ route('admin.faq.update', $faq) }}">
             @csrf
-            @method('PUT')
 
             <div class="mb-3">
                 <label for="question" class="form-label">Question <span class="text-danger">*</span></label>
