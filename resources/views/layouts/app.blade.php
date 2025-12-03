@@ -12,8 +12,10 @@
     <link rel="stylesheet" href="{{ asset('css/icofont.min.css') }}">
     <!-- Owl-Carosal-Style-link -->
     <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
-    <!-- Bootstrap-Style-link -->
+    <!-- Bootstrap-Style-link (Bootstrap 4) -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <!-- Bootstrap 5 CSS for FAQ accordion -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Aos-Style-link -->
     <link rel="stylesheet" href="{{ asset('css/aos.css') }}">
     <!-- Coustome-Style-link -->
