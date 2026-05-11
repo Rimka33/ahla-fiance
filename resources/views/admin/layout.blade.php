@@ -27,8 +27,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Admin Theme CSS -->
-    <link rel="stylesheet" href="{{ asset('css/admin-theme.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/admin-forms.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin-theme.css') }}?v={{ filemtime(public_path('css/admin-theme.css')) }}">
+    <link rel="stylesheet" href="{{ asset('css/admin-forms.css') }}?v={{ filemtime(public_path('css/admin-forms.css')) }}">
 
     <style>
         /* ============================================

@@ -33,17 +33,17 @@
             <h5 class="mb-0"><i class="bi bi-images"></i> Images statiques de la page</h5>
         </div>
         <div class="card-body">
-            <div class="row">
-                <div class="col-md-3">
+            <div class="row g-3">
+                <div class="col-6 col-sm-4 col-md-3">
                     <x-admin.static-image-item imageName="blue_dotes.png" label="Points décoratifs" />
                 </div>
-                <div class="col-md-3">
+                <div class="col-6 col-sm-4 col-md-3">
                     <x-admin.static-image-item imageName="our_app.png" label="Image application" />
                 </div>
-                <div class="col-md-3">
+                <div class="col-6 col-sm-4 col-md-3">
                     <x-admin.static-image-item imageName="black_google_play.png" label="Bouton Google Play" />
                 </div>
-                <div class="col-md-3">
+                <div class="col-6 col-sm-4 col-md-3">
                     <x-admin.static-image-item imageName="black_appstore.png" label="Bouton App Store" />
                 </div>
             </div>

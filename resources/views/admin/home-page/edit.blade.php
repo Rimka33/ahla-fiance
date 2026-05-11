@@ -36,46 +36,46 @@
             <!-- Section Hero -->
             <div class="mb-4">
                 <h6 class="border-bottom pb-2 mb-3"><i class="bi bi-star me-2"></i> Section Hero (Bannière principale)</h6>
-                <div class="row">
-                    <div class="col-md-3 mb-3">
+                <div class="row g-3">
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
                         <x-admin.static-image-item imageName="banavt1.png" label="Avatar utilisateur 1" />
                     </div>
-                    <div class="col-md-3 mb-3">
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
                         <x-admin.static-image-item imageName="banavt2.png" label="Avatar utilisateur 2" />
                     </div>
-                    <div class="col-md-3 mb-3">
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
                         <x-admin.static-image-item imageName="banavt3.png" label="Avatar utilisateur 3" />
                     </div>
-                    <div class="col-md-3 mb-3">
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
                         <x-admin.static-image-item imageName="play.svg" label="Icône Play" />
                     </div>
-                    <div class="col-md-3 mb-3">
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
                         <x-admin.static-image-item imageName="smallStar.png" label="Petite étoile" />
                     </div>
-                    <div class="col-md-3 mb-3">
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
                         <x-admin.static-image-item imageName="bigstar.png" label="Grande étoile" />
                     </div>
-                    <div class="col-md-3 mb-3">
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
                         <x-admin.static-image-item imageName="iphonescren.png" label="Cadre iPhone" />
                     </div>
                 </div>
-                <div class="row mt-3">
+                <div class="row g-3 mt-1">
                     <div class="col-12">
-                        <label class="form-label fw-bold">Screenshots du slider</label>
+                        <label class="form-label fw-semibold text-muted" style="font-size:0.8rem;text-transform:uppercase;letter-spacing:.5px;">Screenshots du slider</label>
                     </div>
-                    <div class="col-md-2 mb-3">
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
                         <x-admin.static-image-item imageName="bannerScreen1.png" label="Screenshot 1" />
                     </div>
-                    <div class="col-md-2 mb-3">
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
                         <x-admin.static-image-item imageName="bannerScreen2.png" label="Screenshot 2" />
                     </div>
-                    <div class="col-md-2 mb-3">
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
                         <x-admin.static-image-item imageName="bannerScreen3.png" label="Screenshot 3" />
                     </div>
-                    <div class="col-md-2 mb-3">
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
                         <x-admin.static-image-item imageName="bannerScreen4.png" label="Screenshot 4" />
                     </div>
-                    <div class="col-md-2 mb-3">
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
                         <x-admin.static-image-item imageName="bannerScreen5.png" label="Screenshot 5" />
                     </div>
                 </div>
@@ -86,11 +86,11 @@
             <!-- Section À propos -->
             <div class="mb-4">
                 <h6 class="border-bottom pb-2 mb-3"><i class="bi bi-info-circle me-2"></i> Section À propos</h6>
-                <div class="row">
-                    <div class="col-md-4 mb-3">
+                <div class="row g-3">
+                    <div class="col-6 col-sm-4 col-md-3">
                         <x-admin.static-image-item imageName="appscreen.png" label="Image principale" />
                     </div>
-                    <div class="col-md-4 mb-3">
+                    <div class="col-6 col-sm-4 col-md-3">
                         <x-admin.static-image-item imageName="applicationvideothumb.png" label="Thumbnail vidéo" />
                     </div>
                 </div>
@@ -101,14 +101,14 @@
             <!-- Icônes des fonctionnalités -->
             <div class="mb-4">
                 <h6 class="border-bottom pb-2 mb-3"><i class="bi bi-lightning me-2"></i> Icônes des fonctionnalités</h6>
-                <div class="row">
-                    <div class="col-md-3 mb-3">
+                <div class="row g-3">
+                    <div class="col-6 col-sm-4 col-md-3">
                         <x-admin.static-image-item imageName="recharge.png" label="Icône Recharge" />
                     </div>
-                    <div class="col-md-3 mb-3">
+                    <div class="col-6 col-sm-4 col-md-3">
                         <x-admin.static-image-item imageName="echange.png" label="Icône Échange" />
                     </div>
-                    <div class="col-md-3 mb-3">
+                    <div class="col-6 col-sm-4 col-md-3">
                         <x-admin.static-image-item imageName="qr.png" label="Icône QR Code" />
                     </div>
                 </div>
@@ -119,14 +119,14 @@
             <!-- Icônes des propositions de valeur -->
             <div class="mb-4">
                 <h6 class="border-bottom pb-2 mb-3"><i class="bi bi-star me-2"></i> Icônes des propositions de valeur</h6>
-                <div class="row">
-                    <div class="col-md-4 mb-3">
+                <div class="row g-3">
+                    <div class="col-6 col-sm-4 col-md-3">
                         <x-admin.static-image-item imageName="ergonome.png" label="Icône Ergonomie" />
                     </div>
-                    <div class="col-md-4 mb-3">
+                    <div class="col-6 col-sm-4 col-md-3">
                         <x-admin.static-image-item imageName="security.png" label="Icône Sécurité" />
                     </div>
-                    <div class="col-md-4 mb-3">
+                    <div class="col-6 col-sm-4 col-md-3">
                         <x-admin.static-image-item imageName="support.png" label="Icône Support" />
                     </div>
                 </div>
@@ -137,14 +137,14 @@
             <!-- Icônes des étapes -->
             <div class="mb-4">
                 <h6 class="border-bottom pb-2 mb-3"><i class="bi bi-list-ol me-2"></i> Icônes des étapes (Comment ça fonctionne)</h6>
-                <div class="row">
-                    <div class="col-md-4 mb-3">
+                <div class="row g-3">
+                    <div class="col-6 col-sm-4 col-md-3">
                         <x-admin.static-image-item imageName="howstep1.png" label="Icône Étape 1" />
                     </div>
-                    <div class="col-md-4 mb-3">
+                    <div class="col-6 col-sm-4 col-md-3">
                         <x-admin.static-image-item imageName="howstep2.png" label="Icône Étape 2" />
                     </div>
-                    <div class="col-md-4 mb-3">
+                    <div class="col-6 col-sm-4 col-md-3">
                         <x-admin.static-image-item imageName="howstep3.png" label="Icône Étape 3" />
                     </div>
                 </div>
@@ -155,9 +155,9 @@
             <!-- Screenshots de l'interface -->
             <div class="mb-4">
                 <h6 class="border-bottom pb-2 mb-3"><i class="bi bi-phone me-2"></i> Screenshots de l'interface (intrscrn1.png à intrscrn9.png)</h6>
-                <div class="row">
+                <div class="row g-3">
                     @for($i = 1; $i <= 9; $i++)
-                    <div class="col-md-2 mb-3">
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
                         <x-admin.static-image-item imageName="intrscrn{{ $i }}.png" label="Screenshot {{ $i }}" />
                     </div>
                     @endfor
@@ -169,11 +169,11 @@
             <!-- Autres images -->
             <div class="mb-4">
                 <h6 class="border-bottom pb-2 mb-3"><i class="bi bi-image me-2"></i> Autres images</h6>
-                <div class="row">
-                    <div class="col-md-3 mb-3">
+                <div class="row g-3">
+                    <div class="col-6 col-sm-4 col-md-3">
                         <x-admin.static-image-item imageName="usericon.png" label="Icône utilisateur" />
                     </div>
-                    <div class="col-md-3 mb-3">
+                    <div class="col-6 col-sm-4 col-md-3">
                         <x-admin.static-image-item imageName="blue_dotes.png" label="Points décoratifs" />
                     </div>
                 </div>

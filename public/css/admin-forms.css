@@ -1,448 +1,263 @@
-/* ==============================================
-   FORMULAIRES D'ÉDITION
-   ============================================== */
+/* ============================================================
+   AHLA FINANCE — ADMIN FORMS (UNIFIÉ)
+   form-grid : 2 colonnes sur ≥768px, 1 colonne sur mobile.
+   Labels : var(--text-sm). form-actions sticky : 64px.
+   info-box : border-left bleu accent.
+   ============================================================ */
+
+/* ---------- Wrapper formulaire ---------- */
 .edit-form {
-    max-width: 1200px;
+    max-width: 900px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--section-gap);
 }
 
-.edit-section {
-    background: var(--ahla-white);
-    border-radius: var(--border-radius);
-    border: 1px solid var(--ahla-gray-200);
-    margin-bottom: 1rem;
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    transition: var(--transition-smooth);
-}
-
-.edit-section:hover {
-    box-shadow: var(--shadow-md);
-    border-color: var(--ahla-blue-light);
-}
-
-.edit-section-header {
-    background: var(--ahla-gray-50);
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid var(--ahla-gray-200);
+.form-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
-
-.edit-section-header h6 {
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: var(--ahla-gray-800);
+.form-header h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--ahla-gray-900);
     margin: 0;
+    letter-spacing: -0.01em;
 }
-
-/* Info Box */
-.info-box {
-    background: rgba(46, 100, 186, 0.05);
-    border-radius: var(--border-radius-sm);
-    padding: 0.75rem;
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
+.form-header .breadcrumb-mini {
+    font-size: var(--text-sm);
+    color: var(--ahla-gray-500);
+    margin: 0.25rem 0 0;
 }
+.form-header .breadcrumb-mini a { color: var(--ahla-blue-bright); text-decoration: none; }
+.form-header .breadcrumb-mini a:hover { color: var(--ahla-blue-dark); }
 
-.info-box i {
-    font-size: 1.1rem;
-    color: var(--ahla-blue-bright);
-    margin-top: 0.125rem;
-}
-
-.info-box p {
-    font-size: 0.875rem;
-    color: var(--ahla-gray-700);
-    line-height: 1.5;
-    margin: 0;
-}
-
-/* Preview Grid */
-.edit-preview {
-    background: var(--ahla-gray-50);
-    border-radius: var(--border-radius-sm);
+/* ---------- Sections de formulaire ---------- */
+.edit-section {
+    background: var(--ahla-white);
     border: 1px solid var(--ahla-gray-200);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
     overflow: hidden;
 }
-
-.edit-preview-grid {
-    display: grid;
-    gap: 1px;
-    background: var(--ahla-gray-200);
-}
-
-.preview-item {
-    background: var(--ahla-white);
-    padding: 1rem;
-}
-
-.preview-label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--ahla-gray-600);
-    margin-bottom: 0.375rem;
-}
-
-.preview-content {
-    font-size: 0.875rem;
-    color: var(--ahla-gray-800);
-    line-height: 1.5;
-}
-
-/* Section Actions */
-.section-actions {
+.edit-section-header {
+    background: var(--ahla-gray-50);
+    border-bottom: 1px solid var(--ahla-gray-200);
+    min-height: var(--card-header-height);
+    padding: 0 1.25rem;
     display: flex;
+    align-items: center;
     gap: 0.5rem;
 }
-
-.btn-action.btn-sm {
-    padding: 0.375rem 0.75rem;
-    font-size: 0.8125rem;
+.edit-section-header .section-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: var(--border-radius-sm);
+    background: rgba(46, 100, 186, 0.10);
+    color: var(--ahla-blue-bright);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    flex-shrink: 0;
 }
-
-/* Responsive */
-@media (max-width: 768px) {
-    .edit-section-header {
-        flex-direction: column;
-        gap: 0.75rem;
-        align-items: flex-start;
-    }
-
-    .section-actions {
-        width: 100%;
-    }
-
-    .btn-action.btn-sm {
-        width: 100%;
-    }
-}
-
-.edit-section-header h6 {
-    margin: 0;
-    font-size: 0.9rem;
+.edit-section-header .section-title {
+    font-family: 'Inter', sans-serif;
+    font-size: var(--text-md);
     font-weight: 600;
-    color: var(--ahla-gray-800);
+    color: var(--ahla-gray-900);
+    margin: 0;
 }
-
 .edit-section-body {
-    padding: 1rem;
+    padding: var(--card-body-padding);
 }
 
-/* Grille de formulaire */
+/* ---------- Grille de champs : 2 colonnes ≥768px ---------- */
 .form-grid {
     display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: 1fr;
+    gap: 1rem 1.25rem;
 }
-
-.form-group {
-    margin-bottom: 1rem;
+@media (min-width: 768px) {
+    .form-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
+.form-grid .form-full { grid-column: 1 / -1; }
 
-.form-group:last-child {
-    margin-bottom: 0;
+/* ---------- Champs ---------- */
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
 }
-
-/* Labels et champs */
+.form-field label,
+.edit-form label,
 .form-label {
-    display: block;
-    font-size: 0.85rem;
+    font-size: var(--text-sm);
     font-weight: 600;
     color: var(--ahla-gray-700);
-    margin-bottom: 0.375rem;
+    margin: 0;
+    letter-spacing: 0.1px;
 }
+.form-field label .required,
+.form-label .required { color: var(--ahla-danger); margin-left: 0.15rem; }
 
-.form-control {
+.form-control,
+.form-select,
+.edit-form input[type="text"],
+.edit-form input[type="email"],
+.edit-form input[type="password"],
+.edit-form input[type="number"],
+.edit-form input[type="url"],
+.edit-form input[type="date"],
+.edit-form input[type="datetime-local"],
+.edit-form select {
+    height: var(--input-height);
+    font-size: var(--text-base);
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--ahla-gray-200);
+    background: var(--ahla-white);
+    color: var(--ahla-gray-900);
+    padding: 0.5rem 0.875rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
     width: 100%;
-    padding: 0.625rem 0.875rem;
-    font-size: 0.875rem;
-    border: 1.5px solid var(--ahla-gray-200);
-    border-radius: var(--border-radius);
-    transition: all 0.2s ease;
 }
-
-.form-control:focus {
+.form-control:focus,
+.form-select:focus,
+.edit-form input:focus,
+.edit-form select:focus {
     border-color: var(--ahla-blue-bright);
-    box-shadow: 0 0 0 3px rgba(46, 100, 186, 0.1);
+    box-shadow: 0 0 0 3px rgba(46, 100, 186, 0.14);
+    outline: none;
 }
-
-/* Textarea */
-.form-control-textarea {
-    min-height: 100px;
+textarea.form-control,
+.edit-form textarea {
+    height: auto;
+    min-height: 120px;
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+    padding: 0.625rem 0.875rem;
     resize: vertical;
 }
 
-/* Image preview */
-.image-preview {
-    width: 100%;
-    max-width: 300px;
-    border-radius: var(--border-radius);
-    border: 2px solid var(--ahla-gray-200);
-    overflow: hidden;
-}
-
-.image-preview img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* Actions de formulaire */
-.form-actions {
-    position: sticky;
-    bottom: 0;
-    background: var(--ahla-white);
-    padding: 1rem;
-    border-top: 1px solid var(--ahla-gray-200);
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.75rem;
-    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
-}
-
-/* Validation et messages */
-.form-text {
-    font-size: 0.75rem;
+.form-help {
+    font-size: var(--text-xs);
     color: var(--ahla-gray-500);
-    margin-top: 0.25rem;
+    margin: 0;
 }
-
-.is-invalid {
-    border-color: var(--ahla-danger) !important;
-}
-
-.invalid-feedback {
-    font-size: 0.75rem;
+.invalid-feedback,
+.form-error {
+    font-size: var(--text-xs);
     color: var(--ahla-danger);
     margin-top: 0.25rem;
+    display: block;
+}
+.form-control.is-invalid {
+    border-color: var(--ahla-danger);
 }
 
-/* Switch / Toggle */
-.form-switch {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    cursor: pointer;
-    user-select: none;
-}
-
-.switch-input {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.switch-label {
+/* ---------- Switch / checkbox ---------- */
+.form-check {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.875rem;
-    color: var(--ahla-gray-700);
+    padding: 0;
 }
-
-.switch-slider {
-    position: relative;
-    width: 36px;
-    height: 20px;
-    background: var(--ahla-gray-300);
-    border-radius: 20px;
-    transition: all 0.2s ease;
-}
-
-.switch-slider:before {
-    content: '';
-    position: absolute;
-    left: 2px;
-    top: 2px;
-    width: 16px;
-    height: 16px;
-    background: white;
-    border-radius: 50%;
-    transition: all 0.2s ease;
-}
-
-.switch-input:checked + .switch-slider {
-    background: var(--ahla-blue-bright);
-}
-
-.switch-input:checked + .switch-slider:before {
-    transform: translateX(16px);
-}
-
-/* File Upload */
-.file-upload {
-    position: relative;
-    display: inline-block;
-}
-
-.file-upload-input {
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.file-upload-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.625rem 1rem;
-    background: var(--ahla-gray-100);
-    border: 1.5px dashed var(--ahla-gray-300);
-    border-radius: var(--border-radius);
+.form-check-input {
+    width: 1.05rem;
+    height: 1.05rem;
+    border-radius: 4px;
+    border: 1px solid var(--ahla-gray-300);
     cursor: pointer;
-    transition: all 0.2s ease;
 }
-
-.file-upload-label:hover {
-    background: var(--ahla-gray-200);
+.form-check-input:checked {
+    background-color: var(--ahla-blue-bright);
     border-color: var(--ahla-blue-bright);
 }
-
-.file-upload-label i {
-    font-size: 1.1rem;
-    color: var(--ahla-blue-bright);
+.form-check-label {
+    font-size: var(--text-sm);
+    color: var(--ahla-gray-700);
+    margin: 0;
+    cursor: pointer;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .form-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .form-actions {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .form-actions .btn {
-        width: 100%;
-    }
-}
-
-/* ==============================================
-   CLASSES CSS MANQUANTES - DESIGN PAGES D'ÉDITION
-   ============================================== */
-
-/* Page Edit Footer - Barre sticky avec actions */
-.page-edit-footer {
-    position: sticky;
-    bottom: 0;
-    background: var(--ahla-white);
-    padding: 1rem 1.5rem;
-    border-top: 1px solid var(--ahla-gray-200);
-    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.06);
+/* ---------- File upload + preview ---------- */
+.file-field {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 50;
-    gap: 0.75rem;
-}
-
-.page-edit-footer .btn {
-    min-width: 120px;
-}
-
-/* Content Preview - Bloc de prévisualisation */
-.content-preview {
-    background: var(--ahla-gray-50);
-    border: 1px solid var(--ahla-gray-200);
-    border-radius: var(--border-radius);
-    padding: 1.25rem;
-    margin-bottom: 1.5rem;
-    transition: var(--transition-smooth);
-}
-
-.content-preview:hover {
-    box-shadow: var(--shadow-md);
-    border-color: var(--ahla-blue-light);
-}
-
-/* Content Preview Title */
-.content-preview-title {
-    font-weight: 600;
-    color: var(--ahla-blue-bright);
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--ahla-blue-bright);
-    display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 0.5rem;
 }
-
-.content-preview-title i {
-    color: var(--ahla-blue-bright);
-    font-size: 1.1rem;
+.file-preview {
+    width: 100%;
+    max-width: 280px;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--border-radius-sm);
+    border: 1px dashed var(--ahla-gray-300);
+    background: var(--ahla-gray-50);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ahla-gray-400);
+    font-size: var(--text-xs);
 }
+.file-preview img { width: 100%; height: 100%; object-fit: cover; }
 
-/* Section Info - Boîte d'information contextuelle */
-.section-info {
-    background: rgba(46, 100, 186, 0.06);
+/* ---------- Info box (avec accent bleu) ---------- */
+.info-box {
+    background: rgba(46, 100, 186, 0.05);
+    border: 1px solid rgba(46, 100, 186, 0.15);
     border-left: 3px solid var(--ahla-blue-bright);
     border-radius: var(--border-radius-sm);
-    padding: 0.75rem 1rem;
-    margin-bottom: 1.25rem;
-    font-size: 0.875rem;
+    padding: 0.875rem 1rem;
+    font-size: var(--text-sm);
     color: var(--ahla-gray-700);
     display: flex;
     align-items: flex-start;
     gap: 0.5rem;
 }
-
-.section-info i {
+.info-box i {
     color: var(--ahla-blue-bright);
-    flex-shrink: 0;
-    margin-top: 2px;
     font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+}
+.info-box.info-warning {
+    background: rgba(245, 158, 11, 0.06);
+    border-color: rgba(245, 158, 11, 0.25);
+    border-left-color: var(--ahla-warning);
+}
+.info-box.info-warning i { color: var(--ahla-warning); }
+
+/* ---------- Form actions (sticky bar) ---------- */
+.form-actions {
+    position: sticky;
+    bottom: 0;
+    z-index: 5;
+    height: 64px;
+    background: var(--ahla-white);
+    border: 1px solid var(--ahla-gray-200);
+    border-radius: var(--border-radius);
+    box-shadow: 0 -4px 16px rgba(17, 24, 39, 0.04);
+    padding: 0 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem;
 }
 
-.section-info p {
-    margin: 0;
-    line-height: 1.5;
-}
-
-/* Page Section - Classe utilitaire pour cartes de section */
-.page-section {
-    transition: box-shadow 0.2s ease;
-}
-
-.page-section:hover {
-    box-shadow: var(--shadow-md);
-}
-
-/* Responsive - Mobile adaptations */
-@media (max-width: 576px) {
-    .page-edit-footer {
-        flex-direction: column;
-        gap: 0.5rem;
+@media (max-width: 767.98px) {
+    .form-actions {
+        height: auto;
+        min-height: 64px;
+        flex-wrap: wrap;
         padding: 0.75rem 1rem;
     }
-
-    .page-edit-footer .btn {
-        width: 100%;
-        min-width: unset;
-    }
-
-    .section-info {
-        flex-wrap: wrap;
-    }
-
-    .content-preview {
-        padding: 1rem;
-        margin-bottom: 1rem;
-    }
-
-    .content-preview-title {
-        font-size: 0.85rem;
-        margin-bottom: 0.75rem;
-    }
+    .form-actions .btn { flex: 1 1 140px; }
 }

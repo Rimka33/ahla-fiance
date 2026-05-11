@@ -33,16 +33,16 @@
             <small class="text-white-50">Toutes les images affichées sur la page À propos publique peuvent être modifiées ici</small>
         </div>
         <div class="card-body">
-            <div class="row">
-                <div class="col-md-4 mb-3">
+            <div class="row g-3">
+                <div class="col-6 col-sm-4 col-md-3">
                     <x-admin.static-image-item imageName="apropos.png" label="Image principale" />
                     <small class="text-muted d-block mt-2">Image affichée dans la colonne de droite de la section principale</small>
                 </div>
-                <div class="col-md-4 mb-3">
+                <div class="col-6 col-sm-4 col-md-3">
                     <x-admin.static-image-item imageName="our_app.png" label="Image application" />
                     <small class="text-muted d-block mt-2">Image affichée dans la section "Téléchargez l'application"</small>
                 </div>
-                <div class="col-md-4 mb-3">
+                <div class="col-6 col-sm-4 col-md-3">
                     <x-admin.static-image-item imageName="blue_dotes.png" label="Points décoratifs" />
                     <small class="text-muted d-block mt-2">Élément décoratif utilisé dans la section téléchargement</small>
                 </div>

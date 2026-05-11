@@ -32,17 +32,17 @@
             <h5 class="mb-0"><i class="bi bi-images"></i> Images statiques de la page</h5>
         </div>
         <div class="card-body">
-            <div class="row">
-                <div class="col-md-3">
+            <div class="row g-3">
+                <div class="col-6 col-sm-4 col-md-3">
                     <x-admin.static-image-item imageName="mail_icon.png" label="Icône Email" />
                 </div>
-                <div class="col-md-3">
+                <div class="col-6 col-sm-4 col-md-3">
                     <x-admin.static-image-item imageName="phone_icon.png" label="Icône Téléphone" />
                 </div>
-                <div class="col-md-3">
+                <div class="col-6 col-sm-4 col-md-3">
                     <x-admin.static-image-item imageName="location_icon.png" label="Icône Localisation" />
                 </div>
-                <div class="col-md-3">
+                <div class="col-6 col-sm-4 col-md-3">
                     <x-admin.static-image-item imageName="blue_dotes.png" label="Points décoratifs" />
                 </div>
             </div>
