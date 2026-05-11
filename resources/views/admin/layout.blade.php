@@ -15,6 +15,9 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 
+    <!-- Summernote CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+
     <!-- AOS - Animate On Scroll -->
     <link href="{{ asset('css/aos.css') }}" rel="stylesheet">
 
@@ -2786,7 +2789,10 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <!-- Summernote JS -->
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+    <!-- Summernote French Language -->
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-fr-FR.js"></script>
     <!-- AOS Script -->
     <script src="{{ asset('js/aos.js') }}"></script>
     <script>
@@ -2941,26 +2947,27 @@
             }
         });
 
-        // TinyMCE Editor
-        if (typeof tinymce !== 'undefined') {
-            tinymce.init({
-                selector: '.wysiwyg-editor',
-                height: 400,
-                menubar: false,
-                plugins: [
-                    'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-                    'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                    'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
-                ],
-                toolbar: 'undo redo | blocks | ' +
-                    'bold italic forecolor | alignleft aligncenter ' +
-                    'alignright alignjustify | bullist numlist outdent indent | ' +
-                    'removeformat | link image | code | help',
-                content_style: 'body { font-family: Inter, Helvetica, Arial, sans-serif; font-size:14px }',
-                language: 'fr_FR',
-                language_url: 'https://cdn.tiny.cloud/1/no-api-key/tinymce/6/langs/fr_FR.js'
-            });
-        }
+        // Summernote Editor
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof $ !== 'undefined' && typeof $.fn.summernote !== 'undefined') {
+                $('.wysiwyg-editor').summernote({
+                    height: 400,
+                    lang: 'fr-FR',
+                    toolbar: [
+                        ['style', ['bold', 'italic', 'underline', 'clear']],
+                        ['font', ['strikethrough']],
+                        ['para', ['ul', 'ol', 'paragraph']],
+                        ['insert', ['link']],
+                        ['view', ['fullscreen', 'codeview', 'help']]
+                    ],
+                    callbacks: {
+                        onChange: function(contents) {
+                            $(this).trigger('change');
+                        }
+                    }
+                });
+            }
+        });
     </script>
     @stack('scripts')
 </body>

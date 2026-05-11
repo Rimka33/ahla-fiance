@@ -25,7 +25,6 @@
 
 <form id="faqPageForm" method="POST" action="{{ route('admin.faq.page.update') }}" novalidate>
     @csrf
-    @csrf
 
 
     <!-- Section Images statiques -->
@@ -191,12 +190,12 @@
     document.addEventListener('DOMContentLoaded', function() {
         var form = document.getElementById('faqPageForm');
         var submitBtn = document.getElementById('submitFaqPageForm');
-        
+
         if (form && submitBtn) {
             // Event listener sur le bouton submit
             submitBtn.addEventListener('click', function(e) {
                 e.preventDefault(); // Empêcher la soumission par défaut
-                
+
                 // Synchroniser TinyMCE si disponible
                 if (typeof tinymce !== 'undefined') {
                     try {
@@ -205,7 +204,7 @@
                         console.error('Erreur TinyMCE:', error);
                     }
                 }
-                
+
                 // Soumettre le formulaire directement
                 form.submit();
             });
@@ -231,7 +230,7 @@ function previewImageModal(input, previewId) {
         var reader = new FileReader();
         reader.onload = function(e) {
             var previewDiv = document.getElementById(previewId);
-            
+
             // Afficher la nouvelle image
             if (previewDiv) {
                 previewDiv.style.display = 'block';
@@ -253,7 +252,7 @@ function previewImageModal(input, previewId) {
 function autoSubmitImageForm(formId, modalId) {
     var form = document.getElementById(formId);
     if (!form) return;
-    
+
     // Afficher le statut d'enregistrement
     // Extraire l'ID du média depuis le formId (format: editImageForm{id})
     var mediaId = formId.replace('editImageForm', '');
@@ -261,9 +260,9 @@ function autoSubmitImageForm(formId, modalId) {
     if (uploadingStatus) {
         uploadingStatus.style.display = 'block';
     }
-    
+
     var formData = new FormData(form);
-    
+
     fetch(form.action, {
         method: 'POST',
         body: formData,
@@ -326,47 +325,47 @@ function autoSubmitImageForm(formId, modalId) {
 document.addEventListener('DOMContentLoaded', function() {
     // Sélectionner UNIQUEMENT les formulaires dans les modals d'images statiques
     var imageForms = document.querySelectorAll('.modal form[id^="editImageForm"]');
-    
+
     imageForms.forEach(function(form) {
         // Vérifications strictes
         var formId = form.getAttribute('id') || '';
         var formAction = form.getAttribute('action') || '';
-        
+
         // EXCLUSIONS STRICTES - Ignorer absolument le formulaire principal
         if (formId === 'faqPageForm') {
             console.log('Formulaire principal ignoré dans le gestionnaire d\'images');
             return;
         }
-        
+
         // Ignorer les formulaires DELETE pour les FAQs
         if (formId.startsWith('deleteFaqForm_')) {
             return;
                             }
-        
+
         // Ignorer tous les formulaires qui ne sont pas dans un modal
         if (!form.closest('.modal')) {
             return;
         }
-        
+
         // Ignorer si ce n'est PAS un formulaire d'image statique dans un modal
-        if (!formId.startsWith('editImageForm') || 
+        if (!formId.startsWith('editImageForm') ||
             !formAction.includes('static-images.update')) {
             return;
         }
-        
+
         // Vérification finale : ne pas intercepter si l'action pointe vers faq-page/update
         if (formAction.includes('faq-page/update')) {
             console.error('ATTENTION: Tentative d\'interception du formulaire principal détectée et bloquée');
             return;
         }
-        
+
         // Intercepter UNIQUEMENT les formulaires d'images statiques
         form.addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             var formData = new FormData(form);
             var formElement = this;
-            
+
             fetch(form.action, {
                 method: 'POST',
                 body: formData,
@@ -429,23 +428,23 @@ document.addEventListener('DOMContentLoaded', function() {
 // Gestion de la suppression des FAQs via AJAX (pour éviter les conflits avec le formulaire principal)
 document.addEventListener('DOMContentLoaded', function() {
     var deleteButtons = document.querySelectorAll('.delete-faq-btn');
-    
+
     deleteButtons.forEach(function(button) {
         button.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            
+
             var faqId = this.getAttribute('data-faq-id');
             var faqQuestion = this.getAttribute('data-faq-question');
-            
+
             if (!confirm('Supprimer cette FAQ : "' + faqQuestion + '" ?')) {
                 return;
             }
-            
+
             var formData = new FormData();
             formData.append('_method', 'DELETE');
             formData.append('_token', document.querySelector('meta[name="csrf-token"]').content);
-            
+
             fetch('/admin/faq/' + faqId, {
                 method: 'POST',
                 body: formData,

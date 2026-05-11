@@ -41,21 +41,12 @@ class FaqPageController extends Controller
             'ask_question_description' => 'nullable|string',
         ]);
 
-        // Mettre à jour la page
-        $page->update($validated);
-        
-        // Garantir que la page est publiée
-        $page->is_published = true;
-        $page->save();
-        
-        // Rafraîchir le modèle depuis la base de données
-        $page->refresh();
+        // Mettre à jour la page et garantir la publication en une seule opération
+        $page->update(array_merge($validated, ['is_published' => true]));
 
-        // Nettoyer le cache
+        // Nettoyer le cache de manière ciblée
         Cache::forget("page_{$page->slug}");
-        Cache::forget("page_faq");
         Cache::forget('faq_published');
-        Cache::flush(); // Vider complètement le cache
 
         return redirect()->route('admin.faq.page.edit')->with('success', 'Page FAQ mise à jour avec succès.');
     }

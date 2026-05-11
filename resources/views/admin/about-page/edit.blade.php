@@ -25,7 +25,6 @@
 
 <form method="POST" action="{{ route('admin.about-page.update') }}" enctype="multipart/form-data" novalidate>
     @csrf
-    @csrf
 
     <!-- Section Images statiques de la page À propos -->
     <div class="card mb-4">

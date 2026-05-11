@@ -28,13 +28,6 @@ class AboutPageController extends Controller
 
     public function update(Request $request)
     {
-        \Log::info('DEBUG: AboutPage Update HIT', [
-            'method' => $request->method(),
-            'content_type' => $request->header('Content-Type'),
-            'all_data' => $request->all(),
-            'files' => $request->allFiles()
-        ]);
-        
         $page = Page::where('slug', 'a-propos')->firstOrFail();
 
         $validated = $request->validate([
@@ -46,28 +39,16 @@ class AboutPageController extends Controller
             'presentation_vision' => 'nullable|string',
             'why_content' => 'nullable|string',
             'engagements_content' => 'nullable|string',
-            'engagements_content' => 'nullable|string',
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:255',
         ]);
 
-        // Mettre à jour les données
-        // On retire les champs qui ne sont pas dans la table pages (comme image qui est déjà gérée)
+        // Mettre à jour les données et garantir la publication en une seule opération
         $fieldsToUpdate = collect($validated)->except(['image'])->toArray();
-        
-        $page->update($fieldsToUpdate);
-        
-        // Garantir que la page est publiée
-        $page->is_published = true;
-        $page->save();
-        
-        // Rafraîchir le modèle depuis la base de données
-        $page->refresh();
+        $page->update(array_merge($fieldsToUpdate, ['is_published' => true]));
 
-        // Nettoyer le cache
+        // Nettoyer le cache de manière ciblée
         Cache::forget("page_{$page->slug}");
-        Cache::forget("page_a-propos");
-        Cache::flush(); // Vider complètement le cache
 
         return redirect()->route('admin.about-page.edit')->with('success', 'Page À propos mise à jour avec succès.');
     }

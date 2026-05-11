@@ -4,12 +4,13 @@
 @section('page-title', 'Modifier l\'actualité')
 
 @section('content')
-<div class="card">
-    <div class="card-header">
-        <h5 class="mb-0">Modifier l'actualité</h5>
-    </div>
-    <div class="card-body">
+<form method="POST" action="{{ route('admin.news.update', $news->id) }}" enctype="multipart/form-data" id="newsEditForm" novalidate>
     @csrf
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Modifier l'actualité</h5>
+        </div>
+        <div class="card-body">
 
             <div class="mb-3">
                 <label for="title" class="form-label">Titre <span class="text-danger">*</span></label>

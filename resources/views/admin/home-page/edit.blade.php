@@ -25,7 +25,6 @@
 
 <form method="POST" action="{{ route('admin.home-page.update') }}" enctype="multipart/form-data" id="homePageForm" novalidate>
     @csrf
-    @csrf
 
     <!-- Section Images statiques de la page d'accueil -->
     <div class="card mb-4">
@@ -192,7 +191,7 @@
                     <i class="bi bi-star me-2"></i> <strong>1. Section Hero</strong> <span class="text-muted ms-2">(Bannière principale)</span>
                 </button>
             </h2>
-            <div id="collapseHero" class="accordion-collapse collapse show" aria-labelledby="headingHero" data-bs-parent="#homePageAccordion">
+            <div id="collapseHero" class="accordion-collapse collapse show" aria-labelledby="headingHero">
                 <div class="accordion-body">
                     <input type="hidden" name="hero[id]" value="{{ $heroSection->id ?? '' }}">
 
@@ -257,7 +256,7 @@
                     <i class="bi bi-info-circle me-2"></i> <strong>2. Section À propos</strong>
                 </button>
             </h2>
-            <div id="collapseAbout" class="accordion-collapse collapse" aria-labelledby="headingAbout" data-bs-parent="#homePageAccordion">
+            <div id="collapseAbout" class="accordion-collapse collapse" aria-labelledby="headingAbout">
                 <div class="accordion-body">
                     <input type="hidden" name="about[id]" value="{{ $aboutSection->id ?? '' }}">
 
@@ -347,7 +346,7 @@
                     <i class="bi bi-star me-2"></i> <strong>3. Section Nous vous offrons</strong> <span class="badge bg-primary ms-2" id="valuePropsCount">{{ $valuePropositions->count() }}</span>
                 </button>
             </h2>
-            <div id="collapseValueProps" class="accordion-collapse collapse" aria-labelledby="headingValueProps" data-bs-parent="#homePageAccordion">
+            <div id="collapseValueProps" class="accordion-collapse collapse" aria-labelledby="headingValueProps">
                 <div class="accordion-body">
                     <div class="alert alert-info mb-3">
                         <i class="bi bi-info-circle"></i> <strong>Note :</strong> Le titre "Nous vous offrons" est fixe sur la page. Vous pouvez gérer jusqu'à 6 propositions de valeur ci-dessous.
@@ -434,7 +433,7 @@
                     <i class="bi bi-list-check me-2"></i> <strong>4. Section Comment ça fonctionne</strong>
                 </button>
             </h2>
-            <div id="collapseHowItWorks" class="accordion-collapse collapse" aria-labelledby="headingHowItWorks" data-bs-parent="#homePageAccordion">
+            <div id="collapseHowItWorks" class="accordion-collapse collapse" aria-labelledby="headingHowItWorks">
                 <div class="accordion-body">
                     <h6 class="mb-3">En-tête de la section</h6>
                     <input type="hidden" name="how_it_works_header[id]" value="{{ $howItWorksHeader->id ?? '' }}">
@@ -532,7 +531,7 @@
                     <i class="bi bi-images me-2"></i> <strong>5. Section Écrans de l'application</strong> <span class="badge bg-primary ms-2" id="screenshotsCount">{{ $appScreenshots->count() }}</span>
                 </button>
             </h2>
-            <div id="collapseScreenshots" class="accordion-collapse collapse" aria-labelledby="headingScreenshots" data-bs-parent="#homePageAccordion">
+            <div id="collapseScreenshots" class="accordion-collapse collapse" aria-labelledby="headingScreenshots">
                 <div class="accordion-body">
                     <h6 class="mb-3">En-tête de la section</h6>
                     <input type="hidden" name="interface_section[id]" value="{{ $interfaceSection->id ?? '' }}">

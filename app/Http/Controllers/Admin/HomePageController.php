@@ -12,6 +12,7 @@ use App\Models\AppScreenshot;
 use App\Models\Statistic;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class HomePageController extends Controller
 {
@@ -83,22 +84,8 @@ class HomePageController extends Controller
     public function update(UpdateHomePageRequest $request)
     {
         try {
-            // Récupérer les données validées (peut échouer silencieusement)
-            try {
-                $validated = $request->validated();
-            } catch (\Illuminate\Validation\ValidationException $e) {
-                // Si la validation échoue, utiliser les données brutes
-                \Log::warning('HomePage Update - Validation échouée, utilisation des données brutes:', ['errors' => $e->errors()]);
-            }
-            
-            // Log pour déboguer - TOUJOURS logger les données brutes
-            \Log::info('HomePage Update - Données reçues:', [
-                'about' => $request->input('about'),
-                'about_title' => $request->input('about.title'),
-                'about_content' => $request->input('about.content'),
-                'about_badge_text' => $request->input('about.badge_text'),
-                'all_request' => $request->all()
-            ]);
+            // Récupérer les données validées
+            $validated = $request->validated();
 
         // ✅ Mise à jour de la section Hero
         if ($request->has('hero')) {
@@ -179,10 +166,7 @@ class HomePageController extends Controller
                 $section->section_key = $key;
             }
 
-            // Log pour déboguer
-            \Log::info("Section {$key} - Données reçues:", ['data' => $data, 'section_id' => $section->id]);
-
-            // Si des données sont fournies, les mettre à jour
+            // Traiter les données
             // Tous les champs sont toujours envoyés dans le formulaire HTML
             if ($data !== null && is_array($data)) {
                 $updateData = [];
@@ -237,66 +221,16 @@ class HomePageController extends Controller
 
                 // Toujours mettre à jour is_active
                 $updateData['is_active'] = true;
-                
-                // Log avant mise à jour
-                \Log::info("Section {$key} - Données à mettre à jour:", [
-                    'updateData' => $updateData, 
-                    'section_before' => [
-                        'id' => $section->id,
-                        'title' => $section->title,
-                        'content' => $section->content,
-                        'badge_text' => $section->badge_text
-                    ]
-                ]);
-                
-                // Mettre à jour la section - TOUJOURS mettre à jour même si updateData ne contient que is_active
-                // Cela garantit que le timestamp est mis à jour et que le cache est invalidé
-                
-                // FORCER la mise à jour même si updateData semble vide
-                // Utiliser fill() puis save() pour garantir que les données sont bien assignées
+
+                // Mettre à jour la section
                 if (!empty($updateData)) {
                     $section->fill($updateData);
                     $section->save();
-                    \Log::info("Section {$key} - fill() + save() appelés", [
-                        'updateData' => $updateData,
-                        'section_after_fill' => [
-                            'title' => $section->title,
-                            'content' => $section->content,
-                            'badge_text' => $section->badge_text
-                        ]
-                    ]);
-                } else {
-                    \Log::warning("Section {$key} - updateData vide, mais on force quand même la mise à jour", [
-                        'data_received' => $data,
-                        'section_current' => [
-                            'title' => $section->title,
-                            'content' => $section->content
-                        ]
-                    ]);
+                } elseif ($section && !empty($updateData)) {
+                    // Mettre à jour même si aucune donnée spécifique n'est fournie
+                    $section->fill($updateData);
+                    $section->save();
                 }
-                
-                // Forcer la mise à jour du timestamp pour invalider le cache
-                $section->touch();
-                $section->save();
-                
-                // Rafraîchir le modèle depuis la base de données pour avoir les dernières valeurs
-                $section->refresh();
-                
-                // Log après mise à jour pour vérifier que les données sont bien sauvegardées
-                \Log::info("Section {$key} - Section après mise à jour:", [
-                    'section_after' => [
-                        'id' => $section->id,
-                        'title' => $section->title,
-                        'content' => $section->content,
-                        'badge_text' => $section->badge_text,
-                        'updated_at' => $section->updated_at
-                    ]
-                ]);
-            } elseif ($section) {
-                // Même si aucune donnée n'est fournie, forcer la mise à jour du timestamp
-                $section->touch();
-                $section->save();
-                $section->refresh();
             }
         }
 
@@ -474,7 +408,7 @@ class HomePageController extends Controller
             Cache::forget('statistics');
         }
 
-        // ✅ Nettoyer TOUT le cache de manière agressive pour forcer le rechargement
+        // ✅ Nettoyer le cache de manière ciblée
         Cache::forget('home_about_section');
         Cache::forget('home_used_app_text');
         Cache::forget('home_how_it_works_header');
@@ -487,24 +421,15 @@ class HomePageController extends Controller
         Cache::forget('features_active');
         Cache::forget('testimonials_active');
         Cache::forget('download_links_active');
-        
-        // Vider complètement le cache pour forcer le rechargement immédiat
-        Cache::flush();
-        
-        // Forcer le rechargement des modèles Eloquent
-        \Illuminate\Database\Eloquent\Model::clearBootedModels();
-
-        \Log::info('HomePage Update - Mise à jour terminée avec succès');
 
         return redirect()->route('admin.home-page.edit')->with('success', 'Page d\'accueil mise à jour avec succès.');
-        
         } catch (\Exception $e) {
-            \Log::error('HomePage Update - Erreur:', [
+            Log::error('HomePage Update - Erreur:', [
                 'message' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
                 'request_data' => $request->all()
             ]);
-            
+
             return redirect()->route('admin.home-page.edit')
                 ->with('error', 'Erreur lors de la mise à jour: ' . $e->getMessage())
                 ->withInput();

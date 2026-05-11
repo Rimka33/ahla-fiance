@@ -30,16 +30,6 @@ class ContactPageController extends Controller
     public function update(Request $request)
     {
         $page = Page::where('slug', 'contact')->firstOrFail();
-        $settings = SiteSetting::firstOrCreate(
-            [],
-            [
-                'site_name' => 'Ahla Finance',
-                'email' => '',
-                'phone' => '',
-                'address' => '',
-                'google_maps_url' => '',
-            ]
-        );
 
         $validated = $request->validate([
             'badge_text' => 'nullable|string|max:255',
@@ -66,28 +56,26 @@ class ContactPageController extends Controller
         ]);
 
         // Mettre à jour la page
-        $page->update(collect($validated)->only([
-            'badge_text', 'title', 'subtitle', 'form_badge', 'form_title', 'form_description'
-        ])->toArray());
-        
-        // Garantir que la page est publiée
-        $page->is_published = true;
-        $page->save();
-        
-        // Rafraîchir le modèle depuis la base de données
-        $page->refresh();
+        $page->update(array_merge(
+            collect($validated)->only([
+                'badge_text', 'title', 'subtitle', 'form_badge', 'form_title', 'form_description'
+            ])->toArray(),
+            ['is_published' => true]
+        ));
 
-        if ($settings) {
-            $settings->update(collect($validated)->only([
-                'email', 'phone', 'address', 'google_maps_url'
-            ])->toArray());
+        // Mettre à jour ou créer les paramètres du site
+        $siteSetting = SiteSetting::first();
+        if (!$siteSetting) {
+            $siteSetting = new SiteSetting();
         }
+        $siteSetting->fill(collect($validated)->only([
+            'email', 'phone', 'address', 'google_maps_url'
+        ])->toArray());
+        $siteSetting->save();
 
-        // Nettoyer le cache
+        // Nettoyer le cache de manière ciblée
         Cache::forget("page_{$page->slug}");
-        Cache::forget("page_contact");
         Cache::forget('site_settings');
-        Cache::flush(); // Vider complètement le cache
 
         return redirect()->route('admin.contact-page.edit')->with('success', 'Page contact mise à jour avec succès.');
     }

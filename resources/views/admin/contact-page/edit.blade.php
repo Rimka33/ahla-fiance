@@ -25,7 +25,6 @@
 
 <form method="POST" action="{{ route('admin.contact-page.update') }}" enctype="multipart/form-data" novalidate>
     @csrf
-    @csrf
 
     <!-- Section Images statiques -->
     <div class="card mb-3">
@@ -182,7 +181,7 @@ function previewImageModal(input, previewId) {
         var reader = new FileReader();
         reader.onload = function(e) {
             var previewDiv = document.getElementById(previewId);
-            
+
             // Afficher la nouvelle image
             if (previewDiv) {
                 previewDiv.style.display = 'block';
@@ -204,7 +203,7 @@ function previewImageModal(input, previewId) {
 function autoSubmitImageForm(formId, modalId) {
     var form = document.getElementById(formId);
     if (!form) return;
-    
+
     // Afficher le statut d'enregistrement
     // Extraire l'ID du média depuis le formId (format: editImageForm{id})
     var mediaId = formId.replace('editImageForm', '');
@@ -212,9 +211,9 @@ function autoSubmitImageForm(formId, modalId) {
     if (uploadingStatus) {
         uploadingStatus.style.display = 'block';
     }
-    
+
     var formData = new FormData(form);
-    
+
     fetch(form.action, {
         method: 'POST',
         body: formData,
@@ -276,12 +275,12 @@ function autoSubmitImageForm(formId, modalId) {
 document.addEventListener('DOMContentLoaded', function() {
     var mainForm = document.querySelector('form[action="{{ route('admin.contact-page.update') }}"]');
     var submitBtn = document.getElementById('submitContactPageForm');
-    
+
     if (mainForm && submitBtn) {
         // Event listener sur le bouton submit
         submitBtn.addEventListener('click', function(e) {
             e.preventDefault(); // Empêcher la soumission par défaut
-            
+
             // Synchroniser TinyMCE si disponible
             if (typeof tinymce !== 'undefined') {
                 try {
@@ -290,7 +289,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.error('Erreur TinyMCE:', error);
                 }
             }
-            
+
             // Soumettre le formulaire directement
             mainForm.submit();
         });
@@ -314,25 +313,25 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     // Sélectionner UNIQUEMENT les formulaires dans les modals d'images statiques
     var imageForms = document.querySelectorAll('.modal form[id^="editImageForm"]');
-    
+
     imageForms.forEach(function(form) {
         // Vérifications strictes
         var formId = form.getAttribute('id') || '';
         var formAction = form.getAttribute('action') || '';
-        
+
         // Ignorer si ce n'est PAS un formulaire d'image statique dans un modal
-        if (!formId.startsWith('editImageForm') || 
+        if (!formId.startsWith('editImageForm') ||
             !formAction.includes('static-images.update')) {
             return; // Ignorer ce formulaire
         }
-        
+
         // Intercepter UNIQUEMENT les formulaires d'images statiques
         form.addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             var formData = new FormData(form);
             var formElement = this;
-            
+
             fetch(form.action, {
                 method: 'POST',
                 body: formData,

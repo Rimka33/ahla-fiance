@@ -88,7 +88,7 @@ class SiteController extends Controller
 
     public function page($slug)
     {
-        $page = Cache::remember("page_{$slug}", 3600, function () use ($slug) {
+        $page = Cache::remember("page_{$slug}", 300, function () use ($slug) {
             return Page::where('slug', $slug)->where('is_published', true)->first();
         });
 
