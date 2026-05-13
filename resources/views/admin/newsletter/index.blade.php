@@ -15,23 +15,21 @@
     </div>
     <div class="card-body">
         <!-- Recherche et filtres -->
-        <form method="GET" action="{{ route('admin.newsletter.index') }}" class="mb-4">
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <input type="text" name="search" class="form-control" placeholder="Rechercher par email ou nom..." value="{{ request('search') }}">
-                </div>
-                <div class="col-md-3">
-                    <select name="status" class="form-select">
-                        <option value="">Tous les statuts</option>
-                        <option value="1" {{ request('status') === '1' ? 'selected' : '' }}>Actifs</option>
-                        <option value="0" {{ request('status') === '0' ? 'selected' : '' }}>Inactifs</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <button type="submit" class="btn btn-primary w-100">
-                        <i class="bi bi-search"></i> Filtrer
-                    </button>
-                </div>
+        <form method="GET" action="{{ route('admin.newsletter.index') }}" class="filter-bar mb-4">
+            <div class="filter-search">
+                <input type="text" name="search" class="form-control" placeholder="Rechercher par email ou nom..." value="{{ request('search') }}">
+            </div>
+            <div class="filter-select">
+                <select name="status" class="form-select">
+                    <option value="">Tous les statuts</option>
+                    <option value="1" {{ request('status') === '1' ? 'selected' : '' }}>Actifs</option>
+                    <option value="0" {{ request('status') === '0' ? 'selected' : '' }}>Inactifs</option>
+                </select>
+            </div>
+            <div class="filter-submit">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-funnel"></i> Filtrer
+                </button>
             </div>
         </form>
 

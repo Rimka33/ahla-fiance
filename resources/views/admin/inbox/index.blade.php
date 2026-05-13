@@ -4,42 +4,34 @@
 @section('page-title', 'Inbox - Questions des clients')
 
 @section('content')
-<div class="stats-grid fade-in">
-    <!-- Statistiques principales -->
-    <div class="stat-card">
-        <div class="stat-header">
-            <p class="stat-label">Nouvelles</p>
-            <i class="bi bi-envelope icon-flat"></i>
+<div class="kpi-grid mb-4">
+    <div class="kpi-card kpi-orange">
+        <div class="kpi-icon"><i class="bi bi-envelope"></i></div>
+        <div class="kpi-body">
+            <div class="kpi-value">{{ $stats['new'] }}</div>
+            <div class="kpi-label">Nouveaux</div>
         </div>
-        <div class="stat-value">{{ $stats['new'] }}</div>
-        <div class="stat-sublabel">messages non lus</div>
     </div>
-
-    <div class="stat-card">
-        <div class="stat-header">
-            <p class="stat-label">Lues</p>
-            <i class="bi bi-envelope-check icon-flat"></i>
+    <div class="kpi-card kpi-blue">
+        <div class="kpi-icon"><i class="bi bi-envelope-open"></i></div>
+        <div class="kpi-body">
+            <div class="kpi-value">{{ $stats['read'] }}</div>
+            <div class="kpi-label">Lus</div>
         </div>
-        <div class="stat-value">{{ $stats['read'] }}</div>
-        <div class="stat-sublabel">messages lus</div>
     </div>
-
-    <div class="stat-card">
-        <div class="stat-header">
-            <p class="stat-label">Répondue</p>
-            <i class="bi bi-check-circle icon-flat"></i>
+    <div class="kpi-card kpi-green">
+        <div class="kpi-icon"><i class="bi bi-check-circle"></i></div>
+        <div class="kpi-body">
+            <div class="kpi-value">{{ $stats['replied'] }}</div>
+            <div class="kpi-label">Répondus</div>
         </div>
-        <div class="stat-value">{{ $stats['replied'] }}</div>
-        <div class="stat-sublabel">messages répondus</div>
     </div>
-
-    <div class="stat-card">
-        <div class="stat-header">
-            <p class="stat-label">Archivées</p>
-            <i class="bi bi-archive icon-flat"></i>
+    <div class="kpi-card kpi-teal">
+        <div class="kpi-icon"><i class="bi bi-archive"></i></div>
+        <div class="kpi-body">
+            <div class="kpi-value">{{ $stats['archived'] }}</div>
+            <div class="kpi-label">Archivés</div>
         </div>
-        <div class="stat-value">{{ $stats['archived'] }}</div>
-        <div class="stat-sublabel">messages archivés</div>
     </div>
 </div>
 
@@ -49,25 +41,23 @@
     </div>
     <div class="card-body">
         <!-- Filtres -->
-        <form method="GET" action="{{ route('admin.inbox.index') }}" class="mb-4">
-            <div class="row g-3">
-                <div class="col-md-8">
-                    <input type="text" name="search" class="form-control" placeholder="Rechercher par nom, email, sujet..." value="{{ request('search') }}">
-                </div>
-                <div class="col-md-2">
-                    <select name="status" class="form-select">
-                        <option value="">Tous les statuts</option>
-                        <option value="new" {{ request('status') === 'new' ? 'selected' : '' }}>Nouveau</option>
-                        <option value="read" {{ request('status') === 'read' ? 'selected' : '' }}>Lu</option>
-                        <option value="replied" {{ request('status') === 'replied' ? 'selected' : '' }}>Répondu</option>
-                        <option value="archived" {{ request('status') === 'archived' ? 'selected' : '' }}>Archivé</option>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-outline-primary w-100">
-                        <i class="bi bi-search"></i> Filtrer
-                    </button>
-                </div>
+        <form method="GET" action="{{ route('admin.inbox.index') }}" class="filter-bar mb-4">
+            <div class="filter-search">
+                <input type="text" name="search" class="form-control" placeholder="Rechercher par nom, email, sujet..." value="{{ request('search') }}">
+            </div>
+            <div class="filter-select">
+                <select name="status" class="form-select">
+                    <option value="">Tous les statuts</option>
+                    <option value="new" {{ request('status') === 'new' ? 'selected' : '' }}>Nouveau</option>
+                    <option value="read" {{ request('status') === 'read' ? 'selected' : '' }}>Lu</option>
+                    <option value="replied" {{ request('status') === 'replied' ? 'selected' : '' }}>Répondu</option>
+                    <option value="archived" {{ request('status') === 'archived' ? 'selected' : '' }}>Archivé</option>
+                </select>
+            </div>
+            <div class="filter-submit">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-funnel"></i> Filtrer
+                </button>
             </div>
         </form>
 

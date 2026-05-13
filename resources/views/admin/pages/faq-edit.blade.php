@@ -93,7 +93,7 @@
                     @foreach($faqs as $index => $faq)
                         <div class="content-preview mb-3">
                             <div class="card-header bg-white" style="border-bottom: 1px solid #eef2f6; padding: 1.5rem;">
-                                <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex justify-content-between align-items-center gap-3">
                                     <div class="flex-grow-1">
                                         <strong style="color: #2c3e50;">{{ $faq->question }}</strong>
                                         @if($faq->category)
@@ -106,13 +106,13 @@
                                             <span class="badge bg-secondary ms-2">Non publié</span>
                                         @endif
                                     </div>
-                                    <div class="btn-group" role="group">
+                                    <div class="d-flex gap-2 flex-shrink-0">
                                         <a href="{{ route('admin.faq.edit', $faq) }}" class="btn btn-sm btn-outline-primary">
                                             <i class="bi bi-pencil"></i> Modifier
                                         </a>
                                         <button type="button" class="btn btn-sm btn-outline-danger delete-faq-btn" data-faq-id="{{ $faq->id }}" data-faq-question="{{ $faq->question }}">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
+                                            <i class="bi bi-trash"></i> Supprimer
+                                        </button>
                                     </div>
                                 </div>
                             </div>

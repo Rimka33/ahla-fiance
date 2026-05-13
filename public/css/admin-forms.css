@@ -109,15 +109,13 @@
 .form-label .required { color: var(--ahla-danger); margin-left: 0.15rem; }
 
 .form-control,
-.form-select,
 .edit-form input[type="text"],
 .edit-form input[type="email"],
 .edit-form input[type="password"],
 .edit-form input[type="number"],
 .edit-form input[type="url"],
 .edit-form input[type="date"],
-.edit-form input[type="datetime-local"],
-.edit-form select {
+.edit-form input[type="datetime-local"] {
     height: var(--input-height);
     font-size: var(--text-base);
     border-radius: var(--border-radius-sm);
@@ -125,6 +123,19 @@
     background: var(--ahla-white);
     color: var(--ahla-gray-900);
     padding: 0.5rem 0.875rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    width: 100%;
+}
+.form-select,
+.edit-form select {
+    min-height: var(--input-height);
+    height: auto;
+    font-size: var(--text-base);
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--ahla-gray-200);
+    background: var(--ahla-white);
+    color: var(--ahla-gray-900);
+    padding: 0.5rem 2.25rem 0.5rem 0.875rem;
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
     width: 100%;
 }

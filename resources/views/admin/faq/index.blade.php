@@ -13,40 +13,38 @@
     </div>
     <div class="card-body">
         <!-- Filtres -->
-        <form method="GET" action="{{ route('admin.faq.index') }}" class="mb-4">
-            <div class="row g-3">
-                <div class="col-md-4">
-                    <input type="text" name="search" class="form-control" placeholder="Rechercher..." value="{{ request('search') }}">
-                </div>
-                <div class="col-md-2">
-                    <select name="status" class="form-select">
-                        <option value="">Tous les statuts</option>
-                        <option value="pending" {{ request('status') === 'pending' ? 'selected' : '' }}>En attente</option>
-                        <option value="answered" {{ request('status') === 'answered' ? 'selected' : '' }}>Répondu</option>
-                        <option value="published" {{ request('status') === 'published' ? 'selected' : '' }}>Publié</option>
-                        <option value="archived" {{ request('status') === 'archived' ? 'selected' : '' }}>Archivé</option>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <select name="category" class="form-select">
-                        <option value="">Toutes les catégories</option>
-                        @foreach($categories as $cat)
-                            <option value="{{ $cat }}" {{ request('category') === $cat ? 'selected' : '' }}>{{ $cat }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <select name="published" class="form-select">
-                        <option value="">Publié/Normal</option>
-                        <option value="1" {{ request('published') === '1' ? 'selected' : '' }}>Publié</option>
-                        <option value="0" {{ request('published') === '0' ? 'selected' : '' }}>Non publié</option>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-outline-primary w-100">
-                        <i class="bi bi-search"></i> Filtrer
-                    </button>
-                </div>
+        <form method="GET" action="{{ route('admin.faq.index') }}" class="filter-bar mb-4">
+            <div class="filter-search">
+                <input type="text" name="search" class="form-control" placeholder="Rechercher..." value="{{ request('search') }}">
+            </div>
+            <div class="filter-select">
+                <select name="status" class="form-select">
+                    <option value="">Tous les statuts</option>
+                    <option value="pending" {{ request('status') === 'pending' ? 'selected' : '' }}>En attente</option>
+                    <option value="answered" {{ request('status') === 'answered' ? 'selected' : '' }}>Répondu</option>
+                    <option value="published" {{ request('status') === 'published' ? 'selected' : '' }}>Publié</option>
+                    <option value="archived" {{ request('status') === 'archived' ? 'selected' : '' }}>Archivé</option>
+                </select>
+            </div>
+            <div class="filter-select">
+                <select name="category" class="form-select">
+                    <option value="">Toutes les catégories</option>
+                    @foreach($categories as $cat)
+                        <option value="{{ $cat }}" {{ request('category') === $cat ? 'selected' : '' }}>{{ $cat }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="filter-select">
+                <select name="published" class="form-select">
+                    <option value="">Publié/Normal</option>
+                    <option value="1" {{ request('published') === '1' ? 'selected' : '' }}>Publié</option>
+                    <option value="0" {{ request('published') === '0' ? 'selected' : '' }}>Non publié</option>
+                </select>
+            </div>
+            <div class="filter-submit">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-funnel"></i> Filtrer
+                </button>
             </div>
         </form>
 
@@ -81,7 +79,7 @@
                                 </td>
                                 <td>{{ $faq->order }}</td>
                                 <td>
-                                    <div class="btn-group" role="group">
+                                    <div class="d-flex gap-2">
                                         <a href="{{ route('admin.faq.edit', $faq) }}" class="btn btn-sm btn-outline-primary" title="Modifier">
                                             <i class="bi bi-pencil"></i>
                                             <span class="d-none d-md-inline ms-1">Modifier</span>

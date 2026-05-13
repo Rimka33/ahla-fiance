@@ -802,9 +802,16 @@
 .filter-bar .filter-search { flex: 1 1 240px; }
 .filter-bar .filter-select { flex: 0 1 200px; }
 .filter-bar .filter-submit { flex: 0 0 auto; }
-.filter-bar .form-control,
-.filter-bar .form-select {
+.filter-bar .form-control {
     height: var(--input-height);
+    font-size: var(--text-base);
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--ahla-gray-200);
+    background: var(--ahla-white);
+}
+.filter-bar .form-select {
+    min-height: var(--input-height);
+    height: auto;
     font-size: var(--text-base);
     border-radius: var(--border-radius-sm);
     border: 1px solid var(--ahla-gray-200);
